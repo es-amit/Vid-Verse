@@ -1,10 +1,14 @@
+// ignore: duplicate_ignore
+// ignore_for_file: must_be_immutable, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class RoundButton extends StatelessWidget {
   final String title;
+  bool loading;
   final VoidCallback onTap;
-  const RoundButton({super.key,required this.title,required this.onTap});
+  RoundButton({super.key,required this.title,required this.onTap,this.loading=false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class RoundButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
-          child: Text(title,
+          child: loading ? const CircularProgressIndicator(color: Colors.white,) : Text(title,
           style: const TextStyle(
             fontSize: 16,
             color: Colors.white
