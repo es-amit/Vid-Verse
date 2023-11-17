@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:vidverse/screens/authentication/signup_screen.dart';
 import 'package:vidverse/screens/home.dart';
 import 'package:vidverse/utils/utilities.dart';
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
       Utils().toastMessage("Logged in successfully!");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
     }).catchError((error) {
       setState(() {
         loading = false;
@@ -61,24 +62,28 @@ class _LoginScreenState extends State<LoginScreen> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('Login'),
-          centerTitle: true,
-        ),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const Text('Login',
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold
+              ),),
+
+              SvgPicture.asset('assets/login.svg',
+              height: 300,
+              width: 280,),
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    customTextField(controller: emailController, title: 'Email', obsecureText: false),
+                    customTextField(controller: emailController, title: 'Email', obsecureText: false,iconName: Icons.email_outlined,),
                     const SizedBox(height: 10),
-                    customTextField(controller: passwordController, title: 'Password', obsecureText: true),
+                    customTextField(controller: passwordController, title: 'Password', obsecureText: true,iconName: Icons.lock,),
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(

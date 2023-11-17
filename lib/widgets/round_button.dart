@@ -39,7 +39,8 @@ class customTextField extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   String title="";
   bool obsecureText;
-  customTextField({super.key,required this.controller,required this.title,required this.obsecureText});
+  IconData iconName;
+  customTextField({super.key,required this.controller,required this.title,required this.obsecureText,required this.iconName});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class customTextField extends StatelessWidget {
       obscureText: obsecureText,
       controller: controller,
       decoration: InputDecoration(
-        prefixIcon: title == "Password"? const Icon(Icons.lock) : const Icon(Icons.email),
+        prefixIcon: Icon(iconName),
                 labelText: title,
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),

@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vidverse/screens/authentication/login_screen.dart';
+import 'package:vidverse/screens/authentication/login_with_phone.dart';
 import 'package:vidverse/screens/home.dart';
 import 'package:vidverse/utils/utilities.dart';
 import 'package:vidverse/widgets/round_button.dart';
@@ -33,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         loading = false;
       });
       Utils().toastMessage("Account Created!!");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
     }).onError((error, stackTrace) {
       setState(() {
         loading = false;
@@ -57,23 +59,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: const Text('Sign Up'),
-        ),
         body: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const Text('Sign Up',
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold
+              ),),
+              SvgPicture.asset('assets/register.svg',
+              height: 250,
+              width: 280,),
               PhoneAuth(
                 buttonName: "Continue with Phone",
                 imagepath: "assets/phone.svg",
                 size: 25,
                 onTap: () {
-                  print("phone number");
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginWithPhoneNumber()));
                 },
               ),
               const SizedBox(
@@ -91,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: emailController,
                         title: "Email",
                         obsecureText: false,
+                        iconName: Icons.email_outlined,
                       ),
                       const SizedBox(
                         height: 10,
@@ -99,6 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: passwordController,
                         title: "Password",
                         obsecureText: true,
+                        iconName: Icons.lock,
                       ),
                     ],
                   )),
