@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vidverse/home.dart';
+import 'package:vidverse/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
